@@ -6,6 +6,7 @@ const {
   deleteArticle,
   fetchArticleByUser,
   generateSignedUrl,
+  fetchRandomArticles,
 } = require("../controllers/articles");
 const { loginUser, registerUser } = require("../controllers/users");
 const router = express.Router();
@@ -21,6 +22,8 @@ router.get("/fetchArticle/:id", getArticle);
 router.delete("/deleteArticle/:id", deleteArticle); 
 router.get('/articlesByWriter/:id', fetchArticleByUser);
 router.get('/sign-url', generateSignedUrl);
+router.get("/fetchRandomArticles", fetchRandomArticles);
+
 
 
 module.exports = router;

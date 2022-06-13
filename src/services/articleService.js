@@ -13,7 +13,7 @@ const createArticle = async ({ userId, title, description, imageUrl }) => {
   return article;
 };
 
-const fetchAllArticle = async ({ limit, page }, userId) => {
+const fetchAllArticle = async ({ limit, page }) => {
   const articleList = await Article.find()
     .populate("createdBy", (select = ["email"]))
     .skip(page > 0 ? (page - 1) * limit : 0)
@@ -53,12 +53,25 @@ const getArticlesByWriter = async (id, { limit, page }) => {
   };
 };
 
-const generateRandomFilename = filePath => {
-    return (
-        Date.now() + '_' + (Math.random() * 1000000).toFixed() + '_' + filePath
-    );
+const generateRandomFilename = (filePath) => {
+  return (
+    Date.now() + "_" + (Math.random() * 1000000).toFixed() + "_" + filePath
+  );
 };
 
+const getRandomArticles = async () => {
+  const articleList = await Article.find().populate(
+    "createdBy",
+    (select = ["email"])
+  );
+  let newItems = [];
+  for (let i = 0; i < 4; i++) {
+    let idx = Math.floor(Math.random() * articleList.length);
+    newItems.push(articleList[idx]);
+    articleList.splice(idx, 1);
+  }
+  return newItems;
+};
 
 module.exports = {
   createArticle,
@@ -66,5 +79,6 @@ module.exports = {
   fetchAllArticle,
   deletingArticle,
   getArticlesByWriter,
-  generateRandomFilename
+  generateRandomFilename,
+  getRandomArticles
 };
