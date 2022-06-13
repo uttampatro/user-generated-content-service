@@ -65,7 +65,7 @@ const getRandomArticles = async () => {
     (select = ["email"])
   );
   let newItems = [];
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 3; i++) {
     let idx = Math.floor(Math.random() * articleList.length);
     newItems.push(articleList[idx]);
     articleList.splice(idx, 1);
