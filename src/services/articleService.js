@@ -53,10 +53,18 @@ const getArticlesByWriter = async (id, { limit, page }) => {
   };
 };
 
+const generateRandomFilename = filePath => {
+    return (
+        Date.now() + '_' + (Math.random() * 1000000).toFixed() + '_' + filePath
+    );
+};
+
+
 module.exports = {
   createArticle,
   fetchArticle,
   fetchAllArticle,
   deletingArticle,
   getArticlesByWriter,
+  generateRandomFilename
 };
