@@ -73,6 +73,17 @@ const getRandomArticles = async () => {
   return newItems;
 };
 
+const updateArticle = async (_id, { title, description, imageUrl }) => {
+  // const user = await User.findOne({ _id: userId }).select(["email"]);
+  const article = await Article.findById(_id);
+  article.title = title || article.name;
+  article.description = description || article.description;
+  article.imageUrl = imageUrl || article.imageUrl;
+
+  await article.save();
+  return article;
+};
+
 module.exports = {
   createArticle,
   fetchArticle,
@@ -80,5 +91,6 @@ module.exports = {
   deletingArticle,
   getArticlesByWriter,
   generateRandomFilename,
-  getRandomArticles
+  getRandomArticles,
+  updateArticle,
 };

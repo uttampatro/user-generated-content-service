@@ -7,6 +7,7 @@ const {
   fetchArticleByUser,
   generateSignedUrl,
   fetchRandomArticles,
+  updatingArticle,
 } = require("../controllers/articles");
 const { loginUser, registerUser } = require("../controllers/users");
 const router = express.Router();
@@ -23,6 +24,8 @@ router.delete("/deleteArticle/:id", deleteArticle);
 router.get('/articlesByWriter/:id', fetchArticleByUser);
 router.get('/sign-url', generateSignedUrl);
 router.get("/fetchRandomArticles", fetchRandomArticles);
+router.put("/updateArticle/:id", updatingArticle);
+
 
 
 

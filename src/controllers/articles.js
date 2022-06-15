@@ -6,6 +6,7 @@ const {
   getArticlesByWriter,
   generateRandomFilename,
   getRandomArticles,
+  updateArticle,
 } = require("../services/articleService");
 var aws = require("aws-sdk");
 
@@ -141,6 +142,31 @@ const fetchRandomArticles = async (req, res) => {
   }
 };
 
+const updatingArticle = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const title = req.body.title;
+    const description = req.body.description;
+    const imageUrl = req.body.imageUrl;
+
+    const article = await updateArticle(
+      { _id: id },
+      {
+        title,
+        description,
+        imageUrl,
+      }
+    );
+    return res.json(article);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      message: "Something went wrong",
+    });
+  }
+};
+
 module.exports = {
   creatingArticle,
   getAllArticle,
@@ -149,4 +175,5 @@ module.exports = {
   fetchArticleByUser,
   generateSignedUrl,
   fetchRandomArticles,
+  updatingArticle
 };
