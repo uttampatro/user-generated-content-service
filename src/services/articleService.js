@@ -74,9 +74,8 @@ const getRandomArticles = async () => {
 };
 
 const updateArticle = async (_id, { title, description, imageUrl }) => {
-  // const user = await User.findOne({ _id: userId }).select(["email"]);
   const article = await Article.findById(_id);
-  article.title = title || article.name;
+  article.title = title || article.title;
   article.description = description || article.description;
   article.imageUrl = imageUrl || article.imageUrl;
 
